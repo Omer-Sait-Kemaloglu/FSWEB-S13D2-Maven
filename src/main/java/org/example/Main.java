@@ -4,6 +4,8 @@ public class Main {
     public static void main(String[] args) {
         System.out.println("Hello world!");
     }
+
+    // Palindrom Sayıları Bulma
     public static boolean isPalindrome(int number) {
         int originalNumber = Math.abs(number); // Negatif sayılar için mutlak değer
         int reversedNumber = 0;
@@ -18,6 +20,7 @@ public class Main {
         return originalNumber == reversedNumber;
     }
 
+    // Mükemmel Sayıları Bulma
     public static boolean isPerfectNumber(int number) {
         if (number < 1) {
             return false; // Sayı 0'dan küçükse
@@ -33,41 +36,44 @@ public class Main {
 
         return sumOfDivisors == number;
     }
-    public static void numberToWords(int number) {
+
+    // Sayıları Kelimelere Dökme
+    public static String numberToWords(int number) {
         if (number < 0) {
-            System.out.println("Invalid Value");
-            return;
+            return "Invalid Value";
         }
 
         int reversedNumber = reverse(number);
         int digitCountOriginal = getDigitCount(number);
         int digitCountReversed = getDigitCount(reversedNumber);
 
+        StringBuilder words = new StringBuilder();
+
         while (reversedNumber > 0) {
             int lastDigit = reversedNumber % 10;
 
             switch (lastDigit) {
-                case 0 -> System.out.print("Zero ");
-                case 1 -> System.out.print("One ");
-                case 2 -> System.out.print("Two ");
-                case 3 -> System.out.print("Three ");
-                case 4 -> System.out.print("Four ");
-                case 5 -> System.out.print("Five ");
-                case 6 -> System.out.print("Six ");
-                case 7 -> System.out.print("Seven ");
-                case 8 -> System.out.print("Eight ");
-                case 9 -> System.out.print("Nine ");
+                case 0 -> words.append("Zero ");
+                case 1 -> words.append("One ");
+                case 2 -> words.append("Two ");
+                case 3 -> words.append("Three ");
+                case 4 -> words.append("Four ");
+                case 5 -> words.append("Five ");
+                case 6 -> words.append("Six ");
+                case 7 -> words.append("Seven ");
+                case 8 -> words.append("Eight ");
+                case 9 -> words.append("Nine ");
             }
 
             reversedNumber /= 10;
         }
 
-        // Eksik sıfırları yazdır
+        // Eksik sıfırları ekle
         for (int i = 0; i < digitCountOriginal - digitCountReversed; i++) {
-            System.out.print("Zero ");
+            words.append("Zero ");
         }
 
-        System.out.println(); // Yeni satır
+        return words.toString().trim();
     }
 
     // Yardımcı metod: Sayıyı ters çevir
@@ -96,5 +102,4 @@ public class Main {
         }
         return count;
     }
-
 }
